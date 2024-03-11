@@ -6,7 +6,6 @@ import Copyable, { hashSlicer, keepHeadSlicer } from "./Copyable";
 import { Hr } from "./Hr";
 import { Links } from "./Links";
 import { Row } from "./Row";
-import { icon } from "../icons";
 import {
   CheckBadgeIcon,
   ExclamationCircleIcon,
@@ -25,13 +24,7 @@ function setTabToSearch(v: number) {
   window.history.replaceState(null, "", url);
 }
 
-export const Network = ({
-  spec,
-  chainPortalId,
-}: {
-  spec: ChainSpec;
-  chainPortalId: string;
-}) => {
+export const Network = ({ spec }: { spec: ChainSpec }) => {
   const [selectedTab, setSelectedTab] = useState(tabFromSearch());
   const metadataQr = spec.metadataQr;
 
@@ -69,10 +62,6 @@ export const Network = ({
     <div>
       <div className="hidden xl:flex items-center justify-between mb-10">
         <div className="flex items-center space-x-2 text-[40px] leading-none unbounded">
-          <img
-            src={icon(chainPortalId)}
-            className="w-14 h-14 rounded-full bg-neutral-200"
-          />
           <span>{formatTitle(spec.title)}</span>
         </div>
         <Links />
@@ -90,7 +79,7 @@ export const Network = ({
               <div>
                 <img
                   className="w-full"
-                  src={process.env.PUBLIC_URL + spec.specsQr.path}
+                  src={process.env.PUBLIC_URL + "/" + spec.specsQr.path}
                   alt="Qr code"
                 />
                 <div className="flex justify-center text-lg font-medium">
@@ -128,7 +117,7 @@ export const Network = ({
                   <div>
                     <img
                       className="w-full"
-                      src={process.env.PUBLIC_URL + metadataQr?.file.path}
+                      src={process.env.PUBLIC_URL + "/" + metadataQr?.file.path}
                       alt="metadata qr code"
                     />
                     <div className="flex justify-center text-lg font-medium">

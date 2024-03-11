@@ -1,5 +1,4 @@
 import { Listbox } from "@headlessui/react";
-import { icon } from "../icons";
 import { Chains } from "../scheme";
 import { cn, formatTitle } from "../utils";
 import { useState } from "react";
@@ -47,7 +46,6 @@ export const NetworkSelect = ({
                     selected ? "cursor-default" : "cursor-pointer"
                   )}
                 >
-                  <img src={icon(chain)} className="w-8 rounded-full" />
                   <div className="text-lg">
                     {formatTitle(chains[chain].title)}
                   </div>

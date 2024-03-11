@@ -1,6 +1,5 @@
 import { Listbox } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { icon } from "../icons";
 import { Chains, Portals } from "../scheme";
 import { cn, currentPortalKey, formatTitle } from "../utils";
 import { ChevronIcon } from "./ChevronIcon";
@@ -102,7 +101,6 @@ export const NetworkAndPortalSelectMobile = ({
                       selected && "bg-neutral-100 rounded-full"
                     )}
                   >
-                    <img src={icon(chain)} className="w-8 rounded-full" />
                     <div className="text-xl">
                       {formatTitle(chains[chain].title)}
                     </div>
