@@ -8,15 +8,15 @@
     "base58prefix": 36,
     "logo": "centrifuge",
     "decimals": 18,
-    "liveMetaVersion": 1028,
+    "liveMetaVersion": 1103,
     "metadataQr": {
-      "version": 1028,
+      "version": 1103,
       "file": {
-        "path": "qr/centrifuge_metadata_1028.apng",
+        "path": "qr/centrifuge_metadata_1103.apng",
         "signedBy": "Centrifuge",
         "source": {
           "type": "Rpc",
-          "block": "0xe9abd4e754166a20526cec4c8778dbf1a80ddf1c6a52b9d4ce6c03899026fb4d"
+          "block": "0x4430d0547bdfd9e440557cab659230e081b1806d6bb6c7429e5fbc2b89f5387c"
         }
       }
     },
