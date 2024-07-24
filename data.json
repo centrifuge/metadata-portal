@@ -37,15 +37,15 @@
     "base58prefix": 136,
     "logo": "altair",
     "decimals": 18,
-    "liveMetaVersion": 1034,
+    "liveMetaVersion": 1200,
     "metadataQr": {
-      "version": 1034,
+      "version": 1200,
       "file": {
-        "path": "qr/altair_metadata_1034.apng",
+        "path": "qr/altair_metadata_1200.apng",
         "signedBy": "Centrifuge",
         "source": {
           "type": "Rpc",
-          "block": "0xa6b8b30fddbc26c9f92529b78a69f577114d4c5f7b09298c8c03bc66f4481ee6"
+          "block": "0x1f73054b618cd49dbb87d267a2bb1bde443e5c9c5fac71566f9c13084219f4fd"
         }
       }
     },
