@@ -24,7 +24,7 @@ jobs:
         run: cargo check
         env:
           RUST_BACKTRACE: 1
-          RUST_LOG: debug
+          CARGO_PROFILE_DEV_BUILD_OVERRIDE_DEBUG: true
 
       - name: Cargo clippy
         run: cargo clippy -- -D warnings
