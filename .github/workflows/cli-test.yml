@@ -17,40 +17,6 @@ jobs:
       - name: 🔧 Install rust dependencies
         uses: ./.github/workflows/rust-install
 
-      - name: 🔍 Debug Clang + LLVM
-        run: |
-          echo "🔧 which clang:"
-          which clang
-          clang --version
-
-          echo "🔧 LIBCLANG_PATH:"
-          echo "$LIBCLANG_PATH"
-          echo "🔧 LD_LIBRARY_PATH:"
-          echo "$LD_LIBRARY_PATH"
-          echo "🔧 PKG_CONFIG_PATH:"
-          echo "$PKG_CONFIG_PATH"
-
-          echo "🔍 libclang.so symlink:"
-          ls -l $LIBCLANG_PATH/libclang.so || echo "❌ libclang.so missing"
-
-          echo "🔍 libclang-18.so.18 presence:"
-          ls -l /usr/lib/x86_64-linux-gnu/libclang-18.so.18 || echo "❌ libclang-18.so.18 missing"
-
-          echo "🔍 llvm-config location and version:"
-          which llvm-config || echo "❌ llvm-config not found"
-          llvm-config --version || echo "❌ llvm-config broken"
-
-          echo "🔍 llvm-config --libs:"
-          llvm-config --libs || echo "❌ cannot list LLVM libs"
-
-          echo "🔍 llvm-config --cflags:"
-          llvm-config --cflags || echo "❌ cannot get LLVM cflags"
-
-          echo "🔍 pkg-config opencv4:"
-          pkg-config --modversion opencv4 || echo "❌ pkg-config can't find opencv4"
-
-          echo "✅ Clang/LLVM debug check complete"
-
       - name: Cargo fmt
         run: cargo fmt --all -- --check
 
