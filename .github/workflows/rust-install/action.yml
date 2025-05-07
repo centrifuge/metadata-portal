@@ -9,6 +9,11 @@ runs:
         # Make libclang discoverable
         sudo ln -sf /usr/lib/x86_64-linux-gnu/libclang-18.so.18 /usr/lib/llvm-18/lib/libclang.so
 
+        # Symlink llvm-config-18 to llvm-config
+        if ! command -v llvm-config &> /dev/null; then
+          sudo ln -s /usr/lib/llvm-18/bin/llvm-config /usr/local/bin/llvm-config
+        fi
+
         # Expose variables to Rust build
         echo "LIBCLANG_PATH=/usr/lib/llvm-18/lib" >> $GITHUB_ENV
         echo "LD_LIBRARY_PATH=/usr/lib/llvm-18/lib" >> $GITHUB_ENV
