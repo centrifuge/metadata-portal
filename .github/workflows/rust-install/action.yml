@@ -4,21 +4,19 @@ runs:
     - name: 🛠️ Install system dependencies
       run: |
         sudo apt update
-        sudo apt install -y clang-18 llvm-18 llvm-18-dev llvm-18-tools llvm-18-runtime libclang-18-dev libopencv-dev pkg-config
+        sudo apt install -y clang-18 llvm-18-dev libclang-18-dev llvm-18-tools libopencv-dev pkg-config
 
-        # Make libclang discoverable
+        # Fix clang executable name
+        sudo ln -sf /usr/bin/clang-18 /usr/bin/clang
+
+        # Fix libclang linking
         sudo ln -sf /usr/lib/x86_64-linux-gnu/libclang-18.so.18 /usr/lib/llvm-18/lib/libclang.so
 
-        # Symlink llvm-config-18 to llvm-config
-        if ! command -v llvm-config &> /dev/null; then
-          sudo ln -s /usr/lib/llvm-18/bin/llvm-config /usr/local/bin/llvm-config
-        fi
-
-        # Expose variables to Rust build
+        # Env vars for cargo
         echo "LIBCLANG_PATH=/usr/lib/llvm-18/lib" >> $GITHUB_ENV
         echo "LD_LIBRARY_PATH=/usr/lib/llvm-18/lib" >> $GITHUB_ENV
         echo "LLVM_CONFIG_PATH=/usr/lib/llvm-18/bin/llvm-config" >> $GITHUB_ENV
-        echo "CLANG_PATH=/usr/bin/clang-18" >> $GITHUB_ENV
+        echo "OPENCV_CLANG_PATH=/usr/bin/clang" >> $GITHUB_ENV
         echo "PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig" >> $GITHUB_ENV
       shell: bash
 
