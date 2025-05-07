@@ -14,6 +14,26 @@ jobs:
       - name: 🛎 Checkout
         uses: actions/checkout@v4
 
+      - name: 🔧 Install system dependencies for Rust + OpenCV
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            pkg-config \
+            libopencv-dev \
+            clang-18 \
+            llvm-18 \
+            llvm-18-dev \
+            libclang-18-dev
+
+      - name: 🔍 Debug OpenCV installation
+        run: |
+          echo "OpenCV version via pkg-config:"
+          pkg-config --modversion opencv4 || echo "Failed to find opencv4 via pkg-config"
+          echo "OpenCV libraries:"
+          pkg-config --libs opencv4 || echo "Failed to list opencv4 libs"
+          echo "OpenCV headers:"
+          ls -la /usr/include/opencv4 || echo "No opencv4 headers found"
+
       - name: 🔧 Install rust dependencies
         uses: ./.github/workflows/rust-install
 
@@ -33,6 +53,5 @@ jobs:
 
       - name: Cargo clippy
         run: cargo clippy -- -D warnings
-
       - name: Cargo test
         run: cargo test
