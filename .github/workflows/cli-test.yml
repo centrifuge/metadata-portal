@@ -22,6 +22,9 @@ jobs:
 
       - name: Cargo check
         run: cargo check
+        env:
+          RUST_BACKTRACE: 1
+          RUST_LOG: debug
 
       - name: Cargo clippy
         run: cargo clippy -- -D warnings
