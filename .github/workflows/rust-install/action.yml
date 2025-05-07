@@ -50,6 +50,7 @@ runs:
         pkg-config --modversion opencv4 || echo "❌ pkg-config can't find opencv4"
 
         echo "✅ Clang/LLVM debug check complete"
+      shell: bash
 
     - name: 🔍 Check llvm-config
       run: |
