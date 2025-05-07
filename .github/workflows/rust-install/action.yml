@@ -4,7 +4,7 @@ runs:
     - name: 🛠️ Install system dependencies
       run: |
         sudo apt update
-        sudo apt install -y clang-18 llvm-18-dev libclang-18-dev llvm-18-tools libopencv-dev pkg-config
+        sudo apt install -y clang-18 llvm-18 llvm-18-dev llvm-18-tools llvm-18-runtime libclang-18-dev libopencv-dev pkg-config
 
         # Make libclang discoverable
         sudo ln -sf /usr/lib/x86_64-linux-gnu/libclang-18.so.18 /usr/lib/llvm-18/lib/libclang.so
@@ -36,9 +36,9 @@ runs:
         echo "🔍 libclang-18.so.18 presence:"
         ls -l /usr/lib/x86_64-linux-gnu/libclang-18.so.18 || echo "❌ libclang-18.so.18 missing"
 
-        echo "🔍 llvm-config location and version:"
-        which llvm-config || echo "❌ llvm-config not found"
-        llvm-config --version || echo "❌ llvm-config broken"
+        echo "Checking llvm-config:"
+        which llvm-config || echo "❌ llvm-config missing"
+        llvm-config --version || echo "❌ llvm-config failed"
 
         echo "🔍 llvm-config --libs:"
         llvm-config --libs || echo "❌ cannot list LLVM libs"
