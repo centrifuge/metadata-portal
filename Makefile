@@ -8,22 +8,22 @@ endif
 all: tests verifier updater collector cleaner signer
 
 verifier:
-	cargo run --release verify
+	cargo run --release --locked verify
 
 updater:
-	cargo run --release update
+	cargo run --release --locked update
 
 collector:
-	cargo run --release collect
+	cargo run --release --locked collect
 
 cleaner:
-	cargo run --release clean
+	cargo run --release --locked clean
 
 signer:
-	cargo run --release sign
+	cargo run --release --locked sign
 
 tests:
-	cargo test --release
+	cargo test --release --locked
 
 docker.%:
 	docker-compose run --rm $(*)
