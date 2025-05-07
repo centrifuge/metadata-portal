@@ -12,13 +12,9 @@ RUN mkdir -pv "${CARGO_HOME}" \
 RUN apt-get update \
     && apt-get install -y \
         --no-install-recommends \
-        pkg-config \
         libopencv-dev clang libclang-dev libssl-dev ca-certificates \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-ENV OPENCV_PKGCONFIG_NAME=opencv
-ENV PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig
 
 WORKDIR /app
 
