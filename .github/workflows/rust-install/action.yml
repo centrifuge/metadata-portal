@@ -4,9 +4,10 @@ runs:
     - name: 🛠 Install system dependencies
       run: |
         sudo apt update
-        sudo apt install -y clang libclang-dev libopencv-dev pkg-config
-        echo "LIBCLANG_PATH=$(llvm-config --libdir)" >> $GITHUB_ENV
-        echo "LD_LIBRARY_PATH=$(llvm-config --libdir):$LD_LIBRARY_PATH" >> $GITHUB_ENV
+        sudo apt install -y clang-18 libclang-18-dev llvm-18-dev libopencv-dev pkg-config
+        echo "LIBCLANG_PATH=/usr/lib/llvm-18/lib" >> $GITHUB_ENV
+        echo "LD_LIBRARY_PATH=/usr/lib/llvm-18/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+        echo "CLANG_PATH=/usr/bin/clang-18" >> $GITHUB_ENV
       shell: bash
 
     - name: 🔧 Install Rust (Stable)
