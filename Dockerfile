@@ -12,8 +12,8 @@ RUN mkdir -pv "${CARGO_HOME}" \
 RUN apt-get update \
     && apt-get install -y \
         --no-install-recommends \
-        pkg-config \
-        libopencv-dev clang libclang-dev libssl-dev ca-certificates \
+        clang-18 libclang-18-dev llvm-18-dev libopencv-dev pkg-config && \
+    ln -sf /usr/lib/x86_64-linux-gnu/libclang-18.so.18 /usr/lib/llvm-18/lib/libclang.so && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

@@ -1,14 +1,17 @@
 runs:
   using: "composite"
   steps:
-    - name: 🛠️Install system dependencies
+    - name: 🛠️ Install system dependencies
       run: |
         sudo apt update
-        sudo apt install -y clang-18 libclang-18-dev libopencv-dev llvm-18-dev
-        echo "export LIBCLANG_PATH=/usr/lib/llvm-18/lib" >> $GITHUB_ENV
-        echo "export LD_LIBRARY_PATH=/usr/lib/llvm-18/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
-        echo "export LLVM_CONFIG_PATH=/usr/lib/llvm-18/bin/llvm-config" >> $GITHUB_ENV
-        echo "export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
+        sudo apt install -y clang-18 llvm-18-dev libclang-18-dev libopencv-dev pkg-config
+
+        # GitHub Actions environment export syntax
+        echo "LIBCLANG_PATH=/usr/lib/llvm-18/lib" >> $GITHUB_ENV
+        echo "LD_LIBRARY_PATH=/usr/lib/llvm-18/lib" >> $GITHUB_ENV
+        echo "LLVM_CONFIG_PATH=/usr/lib/llvm-18/bin/llvm-config" >> $GITHUB_ENV
+        echo "CLANG_PATH=/usr/bin/clang-18" >> $GITHUB_ENV
+        echo "PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig" >> $GITHUB_ENV
       shell: bash
 
     - name: 🔧 Install Rust (Stable)
