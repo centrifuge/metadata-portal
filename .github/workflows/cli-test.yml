@@ -60,6 +60,10 @@ jobs:
           LLVM_CONFIG_PATH: /usr/lib/llvm-18/bin/llvm-config
           OPENCV_CLANG_PATH: /usr/bin/clang-18
           PKG_CONFIG_PATH: /usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig
+          OPENCV4_NO_PKG_CONFIG: 0
+          OPENCV4_STATIC: 0
+          CXX: g++
+          CC: gcc
           RUST_BACKTRACE: full
           RUSTFLAGS: "-C debuginfo=2"
           CARGO_PROFILE_DEV_BUILD_OVERRIDE_DEBUG: true
