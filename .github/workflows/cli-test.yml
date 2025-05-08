@@ -26,7 +26,14 @@ jobs:
       - name: Cargo fmt
         run: cargo fmt --all -- --check
 
-      - name: Cargo check
+      - name: Clean cargo artifacts
+        run: |
+          rm -f Cargo.lock
+          cargo clean
+          cargo update -p opencv
+          cargo tree | grep opencv
+
+      - name: Cargo check --locked
         run: cargo check
 
       - name: Cargo clippy
