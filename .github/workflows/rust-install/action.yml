@@ -1,6 +1,11 @@
 runs:
   using: "composite"
   steps:
+    - name: 🔄 Clean Cargo git checkouts
+      run: |
+        rm -rf ~/.cargo/git/checkouts
+      shell: bash
+
     - name: 🛠️Install system dependencies
       run: |
         sudo apt update
