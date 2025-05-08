@@ -52,6 +52,12 @@ jobs:
           RUSTFLAGS: "-C debuginfo=2"
           CARGO_PROFILE_DEV_BUILD_OVERRIDE_DEBUG: true
 
+      - name: Debug build logs
+        if: failure()
+        run: |
+          echo ">>> Contents of target/debug/build/opencv-*/output <<<"
+          cat $(find ./target/debug/build -name output | grep opencv | head -n1) || echo "No output log found"
+
       - name: Cargo clippy
         run: cargo clippy -- -D warnings
       - name: Cargo test
