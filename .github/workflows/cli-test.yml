@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'cli/**'
+      - "cli/**"
 
 jobs:
   test:
@@ -16,6 +16,12 @@ jobs:
 
       - name: 🔧 Install rust dependencies
         uses: ./.github/workflows/rust-install
+
+      - name: 🧹 Clean Cargo Git checkouts and OpenCV build
+        run: |
+          rm -rf ~/.cargo/git/checkouts
+          rm -rf ~/.cargo/registry/src/*/opencv-*
+          rm -rf target
 
       - name: Cargo fmt
         run: cargo fmt --all -- --check
