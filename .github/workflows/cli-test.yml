@@ -10,6 +10,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      CARGO_TARGET_DIR: /tmp/cargo-target-${{ github.sha }}
     steps:
       - name: 🛎 Checkout
         uses: actions/checkout@v4
@@ -21,32 +23,28 @@ jobs:
         run: |
           rm -rf ~/.cargo/git/checkouts
           rm -rf ~/.cargo/registry/src/*/opencv-*
-          rm -rf target
+          rm -rf $CARGO_TARGET_DIR
+          cargo clean
 
-      - name: Cargo fmt
+      - name: 📦 Cargo update opencv
+        run: cargo update -p opencv
+
+      - name: 🧪 Force OpenCV binding generation
+        run: |
+          cargo build -p opencv || true
+
+      - name: 🔍 Confirm regenerated cvt_color binding
+        run: |
+          grep -A 10 "pub fn cvt_color" $CARGO_TARGET_DIR/debug/build/opencv-*/out/opencv/imgproc.rs || echo "❌ cvt_color not found"
+
+      - name: 🔬 Cargo fmt
         run: cargo fmt --all -- --check
 
-      - name: Clean cargo artifacts
-        run: |
-          rm -f Cargo.lock
-          rm -rf target
-          rm -rf ~/.cargo/git/checkouts/parity-signer*
-          rm -rf ~/.cargo/registry
-          cargo clean
-          cargo update -p opencv
+      - name: 🧪 Cargo check --locked
+        run: cargo check --locked
 
-      - name: Debug OpenCV version
-        run: cargo tree | grep opencv
-
-      - name: Confirm regenerated cvt_color binding
-        run: |
-          grep -A 10 "pub fn cvt_color" target/debug/build/opencv-*/out/opencv/imgproc.rs || echo "not found"
-
-      - name: Cargo check --locked
-        run: cargo check
-
-      - name: Cargo clippy
+      - name: 🧹 Cargo clippy
         run: cargo clippy -- -D warnings
 
-      - name: Cargo test
+      - name: 🧪 Cargo test
         run: cargo test
