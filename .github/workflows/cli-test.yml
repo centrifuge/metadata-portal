@@ -29,9 +29,18 @@ jobs:
       - name: Clean cargo artifacts
         run: |
           rm -f Cargo.lock
+          rm -rf target
+          rm -rf ~/.cargo/git/checkouts/parity-signer*
+          rm -rf ~/.cargo/registry
           cargo clean
           cargo update -p opencv
-          cargo tree | grep opencv
+
+      - name: Debug OpenCV version
+        run: cargo tree | grep opencv
+
+      - name: Confirm regenerated cvt_color binding
+        run: |
+          grep -A 10 "pub fn cvt_color" target/debug/build/opencv-*/out/opencv/imgproc.rs || echo "not found"
 
       - name: Cargo check --locked
         run: cargo check
