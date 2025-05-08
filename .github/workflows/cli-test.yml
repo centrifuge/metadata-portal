@@ -40,6 +40,14 @@ jobs:
       - name: Cargo fmt
         run: cargo fmt --all -- --check
 
+      - name: Install OpenCV + Clang
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libopencv-dev \
+            clang-18 llvm-18 llvm-18-dev libclang-18-dev \
+            pkg-config
+
       - name: Cargo check
         run: cargo check
         env:
