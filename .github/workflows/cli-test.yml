@@ -7,44 +7,46 @@ on:
     paths:
       - "cli/**"
 
+env:
+  CARGO_TARGET_DIR: /tmp/cargo-target-isolated
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      CARGO_TARGET_DIR: /tmp/cargo-target-${{ github.sha }}
+
     steps:
       - name: 🛎 Checkout
         uses: actions/checkout@v4
 
+      - name: 🧹 Full clean: Cargo + Git checkouts + OpenCV
+        run: |
+          rm -rf $CARGO_TARGET_DIR
+          rm -rf ~/.cargo/git/checkouts
+          rm -rf ~/.cargo/registry
+          rm -f Cargo.lock
+          cargo clean
+
       - name: 🔧 Install rust dependencies
         uses: ./.github/workflows/rust-install
 
-      - name: 🧹 Clean Cargo Git checkouts and OpenCV build
-        run: |
-          rm -rf ~/.cargo/git/checkouts
-          rm -rf ~/.cargo/registry/src/*/opencv-*
-          rm -rf $CARGO_TARGET_DIR
-          cargo clean
-
-      - name: 📦 Cargo update opencv
+      - name: 📦 Update specific crates
         run: cargo update -p opencv
 
-      - name: 🧪 Force OpenCV binding generation
-        run: |
-          cargo build -p opencv || true
+      - name: 🔍 Debug OpenCV crate version
+        run: cargo tree | grep opencv
 
-      - name: 🔍 Confirm regenerated cvt_color binding
+      - name: 🔍 Confirm cvt_color binding is correct (4 args)
         run: |
-          grep -A 10 "pub fn cvt_color" $CARGO_TARGET_DIR/debug/build/opencv-*/out/opencv/imgproc.rs || echo "❌ cvt_color not found"
+          grep -A5 "pub fn cvt_color" $CARGO_TARGET_DIR/debug/build/opencv-*/out/opencv/imgproc.rs || echo "❌ cvt_color not found"
 
-      - name: 🔬 Cargo fmt
+      - name: 🧪 cargo fmt
         run: cargo fmt --all -- --check
 
-      - name: 🧪 Cargo check --locked
-        run: cargo check --locked
+      - name: 🧪 cargo check
+        run: cargo check
 
-      - name: 🧹 Cargo clippy
+      - name: 🧪 cargo clippy
         run: cargo clippy -- -D warnings
 
-      - name: 🧪 Cargo test
+      - name: 🧪 cargo test
         run: cargo test
