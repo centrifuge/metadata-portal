@@ -25,6 +25,14 @@ jobs:
             llvm-18-dev \
             libclang-18-dev
 
+      - name: Install OpenCV 4.6
+        run: |
+          sudo add-apt-repository 'deb http://security.ubuntu.com/ubuntu focal-security main'
+          sudo apt-get update
+          sudo apt-get install -y libopencv-dev=4.6.0+dfsg-14~20.04.1
+          # Pin to avoid auto-upgrade
+          echo "libopencv-dev hold" | sudo dpkg --set-selections
+
       - name: 🔍 Debug OpenCV installation
         run: |
           echo "OpenCV version via pkg-config:"
