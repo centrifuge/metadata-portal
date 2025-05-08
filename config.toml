@@ -10,10 +10,8 @@ public_key = "f60bf544f6fc9cc4e30bacbabb52bbc523d1ad77addf8303b724ad59717d766f"
 name = "centrifuge"
 rpc_endpoint = "wss://fullnode.parachain.centrifuge.io"
 color = "#fcc367"
-relay_chain = "polkadot"
 
 [[chains]]
 name = "altair"
 rpc_endpoint = "wss://fullnode.altair.centrifuge.io"
 color = "#ffb700"
-relay_chain = "kusama"
