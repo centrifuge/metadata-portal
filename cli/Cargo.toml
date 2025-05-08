@@ -41,7 +41,7 @@ blake2-rfc = "0.2.18"
 indexmap = {version="1", features=["serde"]}
 
 [dependencies.opencv]
-version = "0.89.0"
+version = "0.94.4"
 default-features = false
 features = ["videoio", "imgproc", "highgui"]
 
