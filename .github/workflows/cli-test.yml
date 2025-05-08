@@ -48,6 +48,10 @@ jobs:
             clang-18 llvm-18 llvm-18-dev libclang-18-dev \
             pkg-config
 
+      - name: 🔍 Test OpenCV pkg-config
+        run: |
+          pkg-config --modversion opencv4 || pkg-config --modversion opencv
+
       - name: Cargo check
         run: cargo check
         env:
@@ -60,8 +64,7 @@ jobs:
           RUSTFLAGS: "-C debuginfo=2"
           CARGO_PROFILE_DEV_BUILD_OVERRIDE_DEBUG: true
 
-      - name: Debug build logs
-        if: failure()
+      - name: 🐛 Print OpenCV binding output (if exists)
         run: |
           echo ">>> Contents of target/debug/build/opencv-*/output <<<"
           cat $(find ./target/debug/build -name output | grep opencv | head -n1) || echo "No output log found"
