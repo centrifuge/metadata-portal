@@ -29,16 +29,21 @@ jobs:
 
       - name: 🔍 Debug OpenCV version
         run: cargo tree -i opencv
-
-      - name: 🔍 Confirm cvt_color signature
+      - name: Print OpenCV version
         run: |
-          grep -A10 "pub fn cvt_color" $CARGO_TARGET_DIR/debug/build/opencv-*/out/opencv/imgproc.rs || echo "❌ cvt_color not found"
+          echo "OpenCV version via pkg-config:"
+          pkg-config --modversion opencv4 || pkg-config --modversion opencv || echo "pkg-config failed"
+
+          echo "OpenCV version via Python (if available):"
+          python3 -c "import cv2; print(cv2.__version__)" || echo "cv2 not available"
 
       - name: ✅ Cargo fmt
         run: cargo fmt --all -- --check
 
       - name: 🛠 Cargo check
-        run: cargo c -r --locked
+        run: |
+          cargo c -r --locked
+          grep -A10 "pub fn cvt_color" $CARGO_TARGET_DIR/debug/build/opencv-*/out/opencv/imgproc.rs || echo "❌ cvt_color not found"
 
       - name: 📎 Cargo clippy
         run: cargo clippy -- -D warnings
