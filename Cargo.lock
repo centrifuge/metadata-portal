@@ -614,7 +614,7 @@ checksum = "245097e9a4535ee1e3e3931fcfcd55a796a44c643e8596ff6566d68f09b87bbc"
 [[package]]
 name = "constants"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "hex",
 ]
@@ -777,7 +777,7 @@ dependencies = [
 [[package]]
 name = "db_handling"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "anyhow",
  "constants",
@@ -800,7 +800,7 @@ dependencies = [
 [[package]]
 name = "defaults"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "definitions",
  "lazy_static",
@@ -813,7 +813,7 @@ dependencies = [
 [[package]]
 name = "definitions"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "constants",
  "frame-metadata",
@@ -1311,7 +1311,7 @@ dependencies = [
 [[package]]
 name = "generate_message"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "clap",
  "constants",
@@ -2625,7 +2625,7 @@ dependencies = [
 [[package]]
 name = "parser"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "bitvec",
  "definitions",
@@ -2838,7 +2838,7 @@ dependencies = [
 [[package]]
 name = "printing_balance"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 
 [[package]]
 name = "proc-macro-crate"
@@ -2889,7 +2889,7 @@ dependencies = [
 [[package]]
 name = "qr_reader_pc"
 version = "0.2.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "anyhow",
  "hex",
@@ -2903,7 +2903,7 @@ dependencies = [
 [[package]]
 name = "qr_reader_phone"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "banana_recovery",
  "constants",
@@ -2918,7 +2918,7 @@ dependencies = [
 [[package]]
 name = "qrcode_rtx"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "bitvec",
  "constants",
@@ -2933,7 +2933,7 @@ dependencies = [
 [[package]]
 name = "qrcode_static"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "anyhow",
  "bitvec",
@@ -4651,7 +4651,7 @@ dependencies = [
 [[package]]
 name = "transaction_parsing"
 version = "0.1.0"
-source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#591e90368f94c615a6b465e0b92f14df2afc09cf"
+source = "git+https://github.com/centrifuge/parity-signer?branch=fix%2Fopencv-qr-reader-2#901c39277ad1a42ae724f65feded51dc8a29b208"
 dependencies = [
  "constants",
  "db_handling",
