@@ -19,13 +19,13 @@ anyhow = "1.0"
 toml = "0.7.3"
 serde = { version = "1.0", features = ["derive"] }
 dialoguer = "0.10"
-qr_reader_phone = {git = "https://github.com/paritytech/parity-signer", rev = "020583b"}
-qr_reader_pc = {git = "https://github.com/paritytech/parity-signer", rev = "020583b"}
-definitions = {git = "https://github.com/paritytech/parity-signer", rev = "020583b"}
-generate_message = {git = "https://github.com/paritytech/parity-signer", rev = "020583b"}
-transaction_parsing = {git = "https://github.com/paritytech/parity-signer", rev = "020583b"}
+qr_reader_phone = {git = "https://github.com/centrifuge/parity-signer", branch = "fix/opencv-qr-reader-2"}
+qr_reader_pc = {git = "https://github.com/centrifuge/parity-signer", branch = "fix/opencv-qr-reader-2"}
+definitions = {git = "https://github.com/centrifuge/parity-signer", branch = "fix/opencv-qr-reader-2"}
+generate_message = {git = "https://github.com/centrifuge/parity-signer", branch = "fix/opencv-qr-reader-2"}
+transaction_parsing = {git = "https://github.com/centrifuge/parity-signer", branch = "fix/opencv-qr-reader-2"}
 tempfile = "3.5"
-sp-core = {git = "https://github.com/paritytech/substrate", default-features = false, features = ["full_crypto"]}
+sp-core = {git = "https://github.com/paritytech/substrate", default-features = false, features = ["full_crypto"], rev = "8cfe326e"}
 parity-scale-codec = "3.4.0"
 image = "0.24"
 quircs = "0.10"
@@ -41,6 +41,12 @@ blake2-rfc = "0.2.18"
 indexmap = {version="1", features=["serde"]}
 
 [dependencies.opencv]
-version = "0.83.0"
+version = "0.94.4"
 default-features = false
 features = ["videoio", "imgproc", "highgui"]
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(ocvrs_opencv_branch_32)'] }
+
+[patch.crates-io]
+substrate-bip39 = { git = "https://github.com/paritytech/substrate-bip39", rev = "ab40b643e065daba52066ada741ffff240d70cdd" } # Uses schnorrkel 0.9.1

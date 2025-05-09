@@ -2,29 +2,51 @@ name: CLI
 
 on:
   pull_request:
-    branches:
-      - master
-    paths:
-      - 'cli/**'
+    branches: [master]
+    paths: ["cli/**"]
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      CARGO_TARGET_DIR: /tmp/cargo-target-${{ github.run_id }}
+
     steps:
       - name: 🛎 Checkout
         uses: actions/checkout@v4
 
-      - name: 🔧 Install rust dependencies
+      - name: 🔧 Install Rust dependencies
         uses: ./.github/workflows/rust-install
 
-      - name: Cargo fmt
+      - name: 🧹 Clean Cargo and OpenCV Artifacts
+        run: |
+          rm -rf ~/.cargo/git/checkouts
+          rm -rf ~/.cargo/registry/src/*/opencv-*
+          rm -rf $CARGO_TARGET_DIR
+          rm -f Cargo.lock
+          cargo clean
+
+      - name: 🔍 Debug OpenCV version
+        run: cargo tree -i opencv
+      - name: Print OpenCV version
+        run: |
+          echo "OpenCV version via pkg-config:"
+          pkg-config --modversion opencv4 || pkg-config --modversion opencv || echo "pkg-config failed"
+
+          echo "OpenCV version via Python (if available):"
+          python3 -c "import cv2; print(cv2.__version__)" || echo "cv2 not available"
+
+      - name: ✅ Cargo fmt
         run: cargo fmt --all -- --check
 
-      - name: Cargo check
-        run: cargo check
+      - name: 🛠 Cargo check
+        run: |
+          cargo c -r --locked
+          grep -A10 "pub fn cvt_color" $CARGO_TARGET_DIR/debug/build/opencv-*/out/opencv/imgproc.rs || echo "❌ cvt_color not found"
 
-      - name: Cargo clippy
+      - name: 📎 Cargo clippy
         run: cargo clippy -- -D warnings
 
-      - name: Cargo test
+      - name: 🧪 Cargo test
         run: cargo test
