@@ -38,7 +38,7 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: 🛠 Cargo check
-        run: cargo check --locked
+        run: cargo c -r --locked
 
       - name: 📎 Cargo clippy
         run: cargo clippy -- -D warnings
