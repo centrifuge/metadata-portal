@@ -19,14 +19,6 @@ jobs:
       - name: 🔧 Install Rust dependencies
         uses: ./.github/workflows/rust-install
 
-      - name: 🧹 Clean Cargo and OpenCV Artifacts
-        run: |
-          rm -rf ~/.cargo/git/checkouts
-          rm -rf ~/.cargo/registry/src/*/opencv-*
-          rm -rf $CARGO_TARGET_DIR
-          rm -f Cargo.lock
-          cargo clean
-
       - name: 🔍 Debug OpenCV version
         run: cargo tree -i opencv
       - name: Print OpenCV version
@@ -43,7 +35,6 @@ jobs:
       - name: 🛠 Cargo check
         run: |
           cargo c -r --locked
-          grep -A10 "pub fn cvt_color" $CARGO_TARGET_DIR/debug/build/opencv-*/out/opencv/imgproc.rs || echo "❌ cvt_color not found"
 
       - name: 📎 Cargo clippy
         run: cargo clippy -- -D warnings
